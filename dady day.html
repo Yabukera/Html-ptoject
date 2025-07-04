@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Father's Day - Dad Day Car</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        header {
+            padding: 30px 0;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffd700, #ffa500, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #ffd700;
+            font-style: italic;
+        }
+        
+        .car-container {
+            position: relative;
+            height: 300px;
+            margin: 40px 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .road {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: #333;
+            z-index: 5;
+        }
+        
+        .road-line {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 8px;
+            width: 60px;
+            background: #ffd700;
+            animation: roadLine 1.5s linear infinite;
+        }
+        
+        .car {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: carBounce 1s infinite alternate;
+        }
+        
+        .car-body {
+            width: 280px;
+            height: 80px;
+            background: linear-gradient(to right, #d32f2f, #b71c1c);
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+        
+        .car-top {
+            position: absolute;
+            top: -50px;
+            left: 30px;
+            width: 220px;
+            height: 60px;
+            background: linear-gradient(to right, #d32f2f, #b71c1c);
+            border-radius: 15px 15px 0 0;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+        }
+        
+        .car-window {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 200px;
+            height: 40px;
+            background: linear-gradient(to bottom, #87CEEB, #B0E2FF);
+            border-radius: 10px;
+        }
+        
+        .car-wheel {
+            position: absolute;
+            bottom: -15px;
+            width: 45px;
+            height: 45px;
+            background: #111;
+            border-radius: 50%;
+            border: 3px solid #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .car-wheel::after {
+            content: "";
+            width: 25px;
+            height: 25px;
+            background: #333;
+            border-radius: 50%;
+        }
+        
+        .wheel-front {
+            left: 40px;
+        }
+        
+        .wheel-back {
+            right: 40px;
+        }
+        
+        .car-light {
+            position: absolute;
+            bottom: 25px;
+            width: 15px;
+            height: 25px;
+            background: #ffd700;
+            border-radius: 5px;
+        }
+        
+        .light-front {
+            left: 10px;
+        }
+        
+        .light-back {
+            right: 10px;
+            background: #ff5252;
+        }
+        
+        .message-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 1s ease-out;
+        }
+        
+        .message {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .message strong {
+            color: #ffd700;
+        }
+        
+        .signature {
+            font-size: 2.2rem;
+            font-family: 'Dancing Script', cursive;
+            color: #ffd700;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .license-plate {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #b71c1c;
+            z-index: 15;
+            font-family: monospace;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            border-radius: 50%;
+            bottom: 0;
+            z-index: 1;
+            animation: float 8s infinite ease-in;
+        }
+        
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        @keyframes carBounce {
+            0% { transform: translateX(-50%) translateY(0); }
+            100% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        @keyframes roadLine {
+            0% { left: -100px; }
+            100% { left: 100%; }
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-800px) rotate(10deg); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.3rem; }
+            .message { font-size: 1.4rem; }
+            .car-body { width: 220px; }
+            .car-top { width: 170px; left: 25px; }
+            .car-window { width: 150px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Happy Father's Day!</h1>
+            <div class="subtitle">A Special Dad Day Car Just For You</div>
+        </header>
+        
+        <div class="car-container">
+            <div class="road">
+                <div class="road-line" style="left: 0;"></div>
+                <div class="road-line" style="left: 200px;"></div>
+                <div class="road-line" style="left: 400px;"></div>
+                <div class="road-line" style="left: 600px;"></div>
+                <div class="road-line" style="left: 800px;"></div>
+            </div>
+            
+            <div class="car">
+                <div class="car-body">
+                    <div class="car-top">
+                        <div class="car-window"></div>
+                    </div>
+                    <div class="car-wheel wheel-front"></div>
+                    <div class="car-wheel wheel-back"></div>
+                    <div class="car-light light-front"></div>
+                    <div class="car-light light-back"></div>
+                    <div class="license-plate">DAD #1</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="message-box">
+            <p class="message">
+                Dear Dad,<br>
+                You've been the <strong>driver</strong> of our family's journey, 
+                the <strong>mechanic</strong> who fixes our problems, 
+                and the <strong>navigator</strong> who always guides us in the right direction.
+            </p>
+            <p class="message">
+                Today, I present you this special <strong>Dad Day Car</strong> as a symbol of my appreciation for everything you do. 
+                May your life be filled with smooth roads, beautiful scenery, and joyful adventures!
+            </p>
+            <p class="signature">Happy Father's Day!</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        Created with love for the world's greatest dad &bull; Happy Father's Day
+    </div>
+
+    <script>
+        // Create balloons for decoration
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffbe0b', '#ff006e', '#8338ec'];
+        const balloonContainer = document.querySelector('.car-container');
+        
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            
+            // Random properties
+            const size = Math.random() * 30 + 30;
+            const left = Math.random() * 100;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const delay = Math.random() * 15;
+            const duration = Math.random() * 10 + 10;
+            
+            balloon.style.width = `${size}px`;
+            balloon.style.height = `${size * 1.2}px`;
+            balloon.style.left = `${left}%`;
+            balloon.style.backgroundColor = color;
+            balloon.style.animationDelay = `${delay}s`;
+            balloon.style.animationDuration = `${duration}s`;
+            
+            balloonContainer.appendChild(balloon);
+            
+            // Remove balloon after animation completes
+            setTimeout(() => {
+                balloon.remove();
+            }, (duration + delay) * 1000);
+        }
+        
+        // Create multiple balloons
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createBalloon, i * 1000);
+        }
+        
+        // Continuous balloon creation
+        setInterval(createBalloon, 3000);
+        
+        // Car light animation
+        const frontLight = document.querySelector('.light-front');
+        setInterval(() => {
+            frontLight.style.opacity = frontLight.style.opacity === '0.5' ? '1' : '0.5';
+        }, 500);
+    </script>
+</body>
+</html>
